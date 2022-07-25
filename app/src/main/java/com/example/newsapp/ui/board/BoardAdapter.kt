@@ -11,9 +11,17 @@ import com.example.newsapp.databinding.FragmentBoardBinding
 import com.example.newsapp.databinding.ItemBoardBinding
 
 class BoardAdapter(val context: Context, val navController: NavController) : RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
- private val text = arrayListOf("Text1", "Text2", "Text3")
-    private val ImageView= arrayListOf(R.raw.lotti,R.raw.lotti,R.raw.lotti)
-    private val list = arrayListOf("1", "2", "3")
+ private val text = arrayListOf(
+     "Читайте новости самым первым и будьте в курсе новых событий",
+     "Добавляйте свою новость, чтобы проинформировать остальных",
+     "Новость распространяется по серверу среди всех пользователей"
+ )
+    private val ImageView= arrayListOf(R.raw.lotti_news1,R.raw.lotti_news3,R.raw.lotti_news2)
+    private val list = arrayListOf(
+        "СВЕЖИЕ",
+        "МОШНЫЕ",
+        "НЕПОВТОРИМЫЕ"
+    )
 
    inner class BoardViewHolder(private var binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
        fun bind(position: Int) {

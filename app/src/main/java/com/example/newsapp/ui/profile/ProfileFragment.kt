@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentDashboardBinding
 import com.example.newsapp.databinding.FragmentProfileBinding
+import com.example.newsapp.ui.board.BoardAdapter
 
 class ProfileFragment : Fragment() {
 
@@ -31,7 +33,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val adapter = FriendsAdapter(requireContext(),findNavController())
+        binding.recyclerViewFriends.adapter = adapter
         saveImage()
         initLauncher()
     }
@@ -52,8 +55,10 @@ class ProfileFragment : Fragment() {
                 val image = it.data?.data
                 if (image != null) {
                     binding.imageView.setImageURI(image)
+                    binding.profileImageView.setImageURI(image)
+
                 }
             }
         }
     }
-    }
+}

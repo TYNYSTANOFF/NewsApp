@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Title"
+        android:maxLines="1"
+        android:textSize="24dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
