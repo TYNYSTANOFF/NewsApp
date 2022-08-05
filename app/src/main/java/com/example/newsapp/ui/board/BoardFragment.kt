@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.newsapp.Prefs
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentBoardBinding
 import com.example.newsapp.databinding.FragmentHomeBinding
@@ -29,7 +30,11 @@ class BoardFragment : Fragment() {
         val adapter = BoardAdapter(requireContext(),findNavController())
         binding.view.adapter = adapter
 binding.dots.setViewPager2(binding.view)
-
+        binding.dots.setViewPager2(binding.view)
+        binding.tvNext.setOnClickListener {
+            Prefs(requireContext()).saveState()
+            findNavController().navigate(R.id.navigation_home)
+        }
     }
 
 }

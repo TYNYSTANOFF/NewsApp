@@ -2,6 +2,8 @@ package com.example.newsapp.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.newsapp.Prefs
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentDashboardBinding
 import com.example.newsapp.databinding.FragmentProfileBinding
@@ -19,6 +23,8 @@ class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var launcher: ActivityResultLauncher<Intent>
+    private lateinit var prefs: Prefs
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +43,11 @@ class ProfileFragment : Fragment() {
         binding.recyclerViewFriends.adapter = adapter
         saveImage()
         initLauncher()
+        saveName()
+
+
     }
+
 
     private fun saveImage() {
         binding.btnSave.setOnClickListener {
@@ -60,5 +70,21 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-    }
+    }  private fun saveName() {
+
+    binding.etName.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            context?.let { Prefs(it).saveNames(s.toString()) };
+            //prefs.saveNames(s.toString());
+        }
+    })
+    binding.etName.setText(context?.let { Prefs(it).getName() })
+    //binding.editText.setText(prefs.getName());
+}
 }

@@ -19,7 +19,7 @@ class NewsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNewsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,9 +34,10 @@ class NewsFragment : Fragment() {
     private fun save() {
         val text = binding.editText.text.toString()
         val bundle = Bundle()
-        val news = News(text, System.currentTimeMillis())
+        val news = News(0,text, System.currentTimeMillis())
         bundle.putSerializable("news", news)
         parentFragmentManager.setFragmentResult("rk_news", bundle)
+        App.dataBase.newsDao().insert(news)
         findNavController().navigateUp()
 
 
